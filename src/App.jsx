@@ -45,28 +45,56 @@
 
 // export default App;
 
-// const App = () => {
-//   return (
-//     <>
-//       <h1>Hello world</h1>
-//     </>
-//   );
-// };
+// import Hello from "./components/Hello";
+// import Message from "./components/Message";
+// import Learn from "./components/Learn";
+// import Form from "./components/Form";
 
-// export default App;
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Services from "./pages/Services";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
-import { Component } from "react";
-import Hello from "./components/Hello";
-
-class App extends Component {
-  render() {
-    return (
-      <>
-        <h1>Hello class based component</h1>
-        <Hello />
-      </>
-    );
-  }
-}
+const App = () => {
+  // let name = "Godbless";
+  // let age = 35;
+  // // let color = "blue";
+  // let color = false;
+  return (
+    <Router>
+      {/* <Hello name={name} age={age} />
+      <Message name={name} color={color} /> */}
+      {/* <Learn isGoal={true} /> */}
+      {/* <Learn /> */}
+      {/* <Form /> */}
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/services" element={<Services />} />
+      </Routes>
+      <Footer />
+    </Router>
+  );
+};
 
 export default App;
+
+// import { Component } from "react";
+// import Hello from "./components/Hello";
+
+// class App extends Component {
+//   render() {
+//     return (
+//       <>
+//         <Hello />
+//       </>
+//     );
+//   }
+// }
+
+// export default App;
