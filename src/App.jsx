@@ -57,27 +57,64 @@ import Services from "./pages/Services";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Hooks from "./hooks/Hooks";
+import Detail from "./hooks/Detail";
+import { useState, useEffect } from "react";
 
 const App = () => {
   // let name = "Godbless";
   // let age = 35;
   // // let color = "blue";
   // let color = false;
+
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch("http://localhost:8000/posts");
+        const apiData = await res.json();
+        setData(apiData);
+        console.log(data);
+      } catch (err) {
+        console.log("error getting data", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+
   return (
     <Router>
+      <Hooks />
       {/* <Hello name={name} age={age} />
       <Message name={name} color={color} /> */}
       {/* <Learn isGoal={true} /> */}
       {/* <Learn /> */}
       {/* <Form /> */}
-      <Navbar />
+      {/* <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/services" element={<Services />} />
       </Routes>
-      <Footer />
+      <Footer /> */}
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={<Hooks data={data} loading={loading} />}
+        />
+        <Route
+          exact
+          path="/detail/:id"
+          element={<Detail data={data} loading={loading} />}
+        />
+      </Routes>
     </Router>
   );
 };
